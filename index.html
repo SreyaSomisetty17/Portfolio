@@ -1,1240 +1,391 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sreya Somisetty — Backend Engineer</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Sreya Somisetty · Backend &amp; Distributed Systems Engineer</title>
+<meta name="description" content="Sreya Somisetty, backend and distributed systems engineer. Six years building high-throughput microservices and event-driven systems in Java and C#."/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,700&family=Cabinet+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
-/* ─── RESET & BASE ─── */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;font-size:16px}
-:root{
-  --ink:#0f1117;
-  --ink2:#1c2030;
-  --paper:#f5f6fa;
-  --paper2:#eceef5;
-  --paper3:#e2e4ef;
-  --chalk:#ffffff;
-  --accent:#2e5be8;
-  --accent-mid:#1a3dbf;
-  --accent-light:#eef1fd;
-  --accent-light2:#dde3fb;
-  --teal:#0b7285;
-  --teal-light:#e0f5f8;
-  --success:#1a6b4a;
-  --success-light:#e0f5ec;
-  --muted:#6b7080;
-  --border:#dde0ea;
-  --border2:#c8ccdb;
-  --r:14px;
-  --rust:var(--accent);
-  --rust-light:var(--accent-light);
-  --sage:var(--teal);
-  --sage-light:var(--teal-light);
-}
-body{
-  background:var(--paper);
-  color:var(--ink);
-  font-family:'Cabinet Grotesk',sans-serif;
-  font-weight:400;
-  line-height:1.65;
-  overflow-x:hidden;
-}
+  :root{
+    --paper:#f4f2ec;      /* warm off-white */
+    --paper2:#efece4;
+    --card:#fbfaf6;
+    --ink:#2b2f37;        /* soft slate ink */
+    --muted:#6d7480;
+    --faint:#8a909b;
+    --line:#e4e0d6;
+    --accent:#43625c;     /* muted sage-teal */
+    --accent-2:#5c7a73;
+    --accent-soft:#e7ece9;
+    --chip:#eceee8;
+    --shadow:0 1px 2px rgba(40,50,60,.04), 0 10px 30px rgba(40,50,60,.05);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:860px;margin:0 auto;padding:0 26px}
+  .serif{font-family:'Lora',Georgia,'Times New Roman',serif}
+  .eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:600}
+  .muted{color:var(--muted)}
 
-/* ─── NAV ─── */
-nav{
-  position:fixed;top:0;left:0;right:0;
-  z-index:500;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 3rem;
-  height:64px;
-  mix-blend-mode:normal;
-}
-nav::before{
-  content:'';
-  position:absolute;inset:0;
-  background:rgba(245,246,250,0.92);
-  backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--border);
-  z-index:-1;
-}
-.nav-logo{
-  font-family:'Fraunces',serif;
-  font-size:1rem;
-  font-weight:700;
-  color:var(--ink);
-  text-decoration:none;
-  letter-spacing:-0.01em;
-}
-.nav-links{display:flex;gap:2rem;list-style:none}
-.nav-links a{
-  font-size:0.78rem;
-  font-weight:700;
-  letter-spacing:0.08em;
-  text-transform:uppercase;
-  color:var(--muted);
-  text-decoration:none;
-  transition:color 0.2s, border-bottom-color 0.2s;
-  border-bottom:2px solid transparent;
-  padding-bottom:2px;
-}
-.nav-links a:hover{color:var(--ink);border-bottom-color:var(--accent)}
-/* nav-hire removed */
+  /* top hairline */
+  .topbar{height:3px;background:linear-gradient(90deg,var(--accent),var(--accent-2))}
 
-/* ─── HERO ─── */
-.hero{
-  min-height:100vh;
-  display:grid;
-  grid-template-rows:1fr auto;
-  padding:0 3rem;
-  padding-top:64px;
-  position:relative;
-  overflow:hidden;
-  background:var(--chalk);
-  border-bottom:1px solid var(--border);
-}
-.hero-bg{
-  position:absolute;inset:0;
-  background:
-    radial-gradient(ellipse 55% 50% at 80% 20%, rgba(46,91,232,0.06) 0%, transparent 65%),
-    radial-gradient(ellipse 40% 40% at 15% 80%, rgba(11,114,133,0.05) 0%, transparent 60%);
-  pointer-events:none;
-}
-.hero-main{
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  padding:4rem 0 2rem;
-  max-width:1100px;
-  margin:0 auto;
-  width:100%;
-}
-.hero-tag{
-  display:inline-flex;align-items:center;gap:0.6rem;
-  font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;
-  color:var(--accent);
-  margin-bottom:2rem;
-  opacity:0;animation:rise 0.7s ease 0.1s forwards;
-}
-.hero-tag::before{content:'◆';font-size:0.45em;display:block;color:var(--accent);margin-top:1px}
-.hero-headline{
-  font-family:'Fraunces',serif;
-  font-size:clamp(3.5rem,7.5vw,7.5rem);
-  font-weight:900;
-  line-height:0.95;
-  letter-spacing:-0.03em;
-  color:var(--ink);
-  margin-bottom:2rem;
-  opacity:0;animation:rise 0.8s ease 0.25s forwards;
-}
-.hero-headline .line2{
-  font-style:italic;
-  color:transparent;
-  -webkit-text-stroke:1.5px rgba(15,17,23,0.22);
-}
-.hero-headline .accent{color:var(--accent)}
-.hero-sub{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:3rem;
-  align-items:end;
-  opacity:0;animation:rise 0.7s ease 0.45s forwards;
-}
-.hero-desc{
-  font-size:1rem;
-  color:var(--muted);
-  line-height:1.75;
-  max-width:480px;
-}
-.hero-desc strong{color:var(--ink);font-weight:700}
-.hero-ctas{
-  display:flex;flex-direction:column;
-  gap:0.75rem;
-  align-items:flex-end;
-}
-.cta-primary{
-  display:inline-flex;align-items:center;gap:0.5rem;
-  background:var(--accent);
-  color:white;
-  padding:0.75rem 1.6rem;
-  border-radius:50px;
-  font-size:0.85rem;font-weight:700;
-  text-decoration:none;
-  letter-spacing:0.02em;
-  transition:transform 0.2s,box-shadow 0.2s,background 0.2s;
-}
-.cta-primary:hover{background:var(--accent-mid);transform:translateY(-2px);box-shadow:0 8px 28px rgba(46,91,232,0.3)}
-.cta-arrow{font-size:1rem;transition:transform 0.2s}
-.cta-primary:hover .cta-arrow{transform:translateX(3px)}
-.cta-secondary{
-  font-size:0.78rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;
-  color:var(--muted);
-  text-decoration:none;transition:color 0.2s;
-}
-.cta-secondary:hover{color:var(--ink)}
-.hero-scroll-bar{
-  display:flex;align-items:center;gap:2rem;
-  padding:1.5rem 0;
-  border-top:1px solid var(--border);
-  opacity:0;animation:rise 0.6s ease 0.7s forwards;
-}
-.hero-stat{display:flex;flex-direction:column;gap:0.1rem}
-.hero-stat-num{
-  font-family:'Fraunces',serif;
-  font-size:1.6rem;font-weight:700;
-  color:var(--ink);line-height:1;
-}
-.hero-stat-num sup{font-size:0.7em;color:var(--accent)}
-.hero-stat-label{font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)}
-.hero-stat-sep{width:1px;height:40px;background:var(--border2)}
-.hero-location{
-  margin-left:auto;
-  font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
-  color:var(--muted);
-}
+  /* ---------- HERO ---------- */
+  header{padding:86px 0 60px}
+  header .eyebrow{margin-bottom:18px;display:block}
+  h1{font-weight:600;font-size:clamp(34px,6vw,52px);line-height:1.05;margin:0 0 10px;letter-spacing:-.01em}
+  .role{font-family:'Lora',serif;font-size:clamp(17px,2.6vw,21px);color:var(--accent);font-style:italic;margin:0 0 22px}
+  .lede{font-size:clamp(16px,2.2vw,18.5px);max-width:60ch;color:#3a3f48;margin:0 0 30px}
+  .links{display:flex;flex-wrap:wrap;gap:11px}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);
+    background:var(--card);color:var(--ink);border-radius:999px;padding:9px 17px;
+    font-size:14px;font-weight:500;transition:.18s ease;box-shadow:var(--shadow)
+  }
+  .btn:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
+  .btn svg{width:15px;height:15px;opacity:.75}
 
-/* ─── MARQUEE ─── */
-.marquee-strip{
-  background:var(--accent);
-  padding:0.7rem 0;
-  overflow:hidden;
-  white-space:nowrap;
-}
-.marquee-track{
-  display:inline-flex;
-  animation:marquee 22s linear infinite;
-}
-.marquee-track span{
-  font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;
-  color:rgba(255,255,255,0.9);
-  padding:0 2.5rem;
-}
-.marquee-track span::after{content:'◆';margin-left:2.5rem;opacity:0.5}
-@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  /* ---------- SECTIONS ---------- */
+  section{padding:34px 0}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:26px}
+  .sec-head h2{font-weight:600;font-size:23px;margin:0;letter-spacing:-.01em}
+  .sec-head .rule{flex:1;height:1px;background:var(--line)}
 
-/* ─── SECTION CHROME ─── */
-.section{
-  background:var(--chalk);
-  padding:4rem 3rem;
-  border-top:1px solid var(--border);
-  position:relative;
-}
-.section.light{background:var(--paper);color:var(--ink)}
-.section.chalk{background:var(--chalk);color:var(--ink)}
-.section.dark{background:var(--ink2);color:var(--chalk)}
-.container{max-width:1100px;margin:0 auto}
-.section-eyebrow{
-  display:flex;align-items:center;gap:0.75rem;
-  font-size:0.65rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;
-  color:var(--accent);
-  margin-bottom:1rem;
-}
-.section-eyebrow::before{content:'◆';font-size:0.45em;display:block;color:var(--accent);margin-top:1px}
-.section-title{
-  font-family:'Fraunces',serif;
-  font-size:clamp(1.8rem,3.5vw,2.6rem);
-  font-weight:700;
-  line-height:1.1;
-  letter-spacing:-0.02em;
-  margin-bottom:2.5rem;
-  color:var(--ink);
-}
-.section.dark .section-title{color:var(--chalk)}
-.section.dark .section-eyebrow{color:rgba(180,195,255,0.85)}
-.section.dark .section-eyebrow::before{color:rgba(180,195,255,0.85)}
+  /* ---------- PROJECT CARDS ---------- */
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:26px 26px 22px;margin-bottom:22px;box-shadow:var(--shadow)
+  }
+  .card .ctx{font-size:12.5px;letter-spacing:.05em;color:var(--faint);text-transform:uppercase;font-weight:600}
+  .card h3{font-family:'Lora',serif;font-weight:600;font-size:22px;margin:6px 0 14px;line-height:1.25}
+  .field{margin:11px 0}
+  .field .lab{display:inline-block;min-width:78px;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:600;vertical-align:top}
+  .field .val{display:inline;color:#3c414b}
+  @media(min-width:620px){
+    .field{display:grid;grid-template-columns:92px 1fr;gap:14px;align-items:start;margin:9px 0}
+    .field .lab{min-width:0}
+  }
+  .stats{display:flex;flex-wrap:wrap;gap:9px;margin:16px 0 4px}
+  .stat{background:var(--accent-soft);color:#33504b;border-radius:8px;padding:5px 11px;font-size:13px;font-weight:600}
+  .diagram{margin:20px 0 6px;background:var(--paper2);border:1px solid var(--line);border-radius:12px;padding:16px 16px 13px}
+  .diagram .dcap{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:12px}
+  .diagram svg{width:100%;height:auto;display:block;font-family:'Inter',system-ui,sans-serif}
+  .diagram text{font-family:'Inter',system-ui,sans-serif}
+  .tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+  .tag{background:var(--chip);color:#565c66;border-radius:6px;padding:4px 9px;font-size:12.5px}
+  .cardlinks{margin-top:14px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+  .cardlinks a{color:var(--accent);font-weight:600;font-size:14px;border-bottom:1px solid transparent;transition:.15s}
+  .cardlinks a:hover{border-color:var(--accent)}
+  .private-note{margin-top:14px;font-size:13.5px;color:var(--faint);font-style:italic}
 
-/* ─── ABOUT / IDENTITY BLOCK ─── */
-.identity-grid{
-  display:grid;
-  grid-template-columns:1fr 1.3fr;
-  gap:3.5rem;
-  align-items:start;
-}
-.identity-left .big-quote{
-  font-family:'Fraunces',serif;
-  font-size:clamp(1.3rem,2.2vw,1.8rem);
-  font-weight:300;
-  font-style:italic;
-  line-height:1.5;
-  color:var(--ink);
-  border-left:3px solid var(--accent);
-  padding-left:1.5rem;
-  margin-bottom:2rem;
-}
-.identity-left p{
-  font-size:0.9rem;
-  color:var(--muted);
-  line-height:1.8;
-  margin-bottom:1rem;
-}
-.identity-left p strong{color:var(--ink)}
-.stack-chips{
-  display:flex;flex-wrap:wrap;gap:0.5rem;
-  margin-top:2rem;
-}
-.chip{
-  background:var(--paper2);
-  border:1px solid var(--border);
-  color:var(--muted);
-  font-size:0.72rem;font-weight:700;letter-spacing:0.04em;
-  padding:0.35rem 0.8rem;
-  border-radius:50px;
-  transition:all 0.2s;
-}
-.chip:hover{background:var(--accent);border-color:var(--accent);color:white}
-.chip.hot{background:var(--accent-light);border-color:var(--accent-light2);color:var(--accent-mid)}
-.identity-right{}
-.timeline-v{display:flex;flex-direction:column;gap:0}
-.tl-item{
-  display:grid;
-  grid-template-columns:120px 1fr;
-  gap:1.5rem;
-  padding-bottom:1.75rem;
-  position:relative;
-}
-.tl-item:last-child{padding-bottom:0}
-.tl-item::before{
-  content:'';
-  position:absolute;
-  left:calc(120px + 0.75rem - 0.5px);
-  top:8px;bottom:0;
-  width:1px;
-  background:var(--border);
-}
-.tl-item:last-child::before{display:none}
-.tl-date{
-  font-size:0.7rem;font-weight:700;letter-spacing:0.06em;
-  color:var(--muted);
-  padding-top:0.15rem;
-  text-align:right;
-}
-.tl-dot{
-  position:absolute;
-  left:calc(120px + 0.75rem - 5px);
-  top:7px;
-  width:10px;height:10px;
-  border-radius:50%;
-  background:var(--accent);
-  box-shadow:0 0 0 3px rgba(46,91,232,0.18);
-}
-.tl-content{padding-left:1.5rem}
-.tl-company{
-  font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
-  color:var(--muted);
-  margin-bottom:0.2rem;
-}
-.tl-role{
-  font-family:'Fraunces',serif;
-  font-size:1.1rem;font-weight:700;
-  color:var(--ink);
-  margin-bottom:0.5rem;
-}
-.tl-desc{
-  font-size:0.82rem;
-  color:var(--muted);
-  line-height:1.65;
-}
-.tl-desc b{color:var(--ink)}
+  /* ---------- EXPERIENCE ---------- */
+  .xp{border-left:2px solid var(--line);margin-left:6px;padding-left:22px}
+  .xp .item{position:relative;padding:6px 0 20px}
+  .xp .item:last-child{padding-bottom:2px}
+  .xp .item:before{content:"";position:absolute;left:-29px;top:12px;width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--paper)}
+  .xp .r{font-weight:600;font-size:16.5px}
+  .xp .c{color:var(--accent);font-family:'Lora',serif;font-style:italic;font-size:15px}
+  .xp .d{font-size:13px;color:var(--faint);margin:2px 0 6px}
+  .xp .n{color:#3c414b;font-size:15px;max-width:64ch}
 
-/* ─── SKILLS ─── */
-.skills-layout{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:1px;
-  background:var(--border);
-  border:1px solid var(--border);
-  border-radius:16px;
-  overflow:hidden;
-}
-.skill-panel{
-  background:var(--chalk);
-  padding:1.25rem 1.75rem;
-  transition:background 0.2s;
-}
-.skill-panel:hover{background:var(--paper)}
-.sp-head{
-  display:flex;align-items:center;gap:0.75rem;
-  margin-bottom:1.25rem;
-}
-.sp-icon{
-  width:32px;height:32px;
-  background:var(--accent-light);
-  border-radius:8px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:14px;
-}
-.sp-cat{
-  font-size:0.65rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;
-  color:var(--muted);
-}
-.sp-tags{display:flex;flex-wrap:wrap;gap:0.4rem}
-.sp-tag{
-  background:var(--paper2);
-  border:1px solid var(--border);
-  color:var(--ink);
-  font-size:0.72rem;font-weight:500;
-  padding:0.3rem 0.7rem;
-  border-radius:6px;
-}
-.sp-tag.core{
-  background:var(--accent-light);
-  border-color:var(--accent-light2);
-  color:var(--accent-mid);
-}
+  /* ---------- ABOUT / FOOTER ---------- */
+  .about p{max-width:64ch;color:#3a3f48}
+  .edu{margin-top:18px;display:grid;gap:4px}
+  .edu .e{font-size:15px}
+  .edu .e b{font-weight:600}
+  .edu .e span{color:var(--faint);font-size:13.5px}
+  footer{border-top:1px solid var(--line);margin-top:20px;padding:34px 0 48px;text-align:center}
+  footer .fname{font-family:'Lora',serif;font-size:18px;font-weight:600;margin-bottom:10px}
+  footer .links{justify-content:center}
+  footer .fine{margin-top:20px;font-size:12.5px;color:var(--faint)}
 
-/* ─── IMPACT NUMBERS ─── */
-.impact-row{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:1px;
-  background:var(--border);
-  border:1px solid var(--border);
-  border-radius:16px;
-  overflow:hidden;
-  margin-bottom:3rem;
-}
-.impact-cell{
-  background:var(--paper);
-  padding:2.5rem 2rem;
-  text-align:center;
-}
-.impact-num{
-  font-family:'Fraunces',serif;
-  font-size:3rem;font-weight:900;
-  color:var(--ink);
-  line-height:1;
-  margin-bottom:0.5rem;
-  letter-spacing:-0.02em;
-}
-.impact-num span{color:var(--accent)}
-.impact-label{
-  font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;
-  color:var(--muted);
-  line-height:1.4;
-}
-
-/* ─── EXPERIENCE (LIGHT BG) ─── */
-.exp-list{display:flex;flex-direction:column;gap:1.5rem}
-.exp-card{
-  background:white;
-  border:1px solid var(--border);
-  border-radius:16px;
-  overflow:hidden;
-  transition:transform 0.25s,box-shadow 0.25s,border-color 0.25s;
-}
-.exp-card:hover{transform:translateY(-3px);box-shadow:0 16px 48px rgba(46,91,232,0.08);border-color:var(--accent-light2)}
-.exp-card-top{
-  display:grid;
-  grid-template-columns:auto 1fr auto;
-  align-items:center;
-  gap:1.25rem;
-  padding:1.25rem 1.5rem;
-  border-bottom:1px solid var(--border);
-  background:var(--paper);
-  cursor:pointer;
-}
-.exp-logo-box{
-  width:48px;height:48px;
-  border-radius:10px;
-  background:var(--accent-light);
-  border:1px solid var(--accent-light2);
-  display:flex;align-items:center;justify-content:center;
-  font-family:'Fraunces',serif;
-  font-size:1.1rem;font-weight:700;
-  color:var(--accent-mid);
-}
-.exp-meta-col{}
-.exp-company-name{
-  font-family:'Fraunces',serif;
-  font-size:1.1rem;font-weight:700;
-  color:var(--ink);
-  margin-bottom:0.15rem;
-}
-.exp-role-title{font-size:0.82rem;font-weight:500;color:var(--muted)}
-.exp-right-meta{text-align:right}
-.exp-period{font-size:0.72rem;font-weight:700;letter-spacing:0.04em;color:var(--muted);margin-bottom:0.4rem}
-.exp-dur{
-  display:inline-block;
-  background:var(--accent-light);
-  color:var(--accent-mid);
-  font-size:0.65rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;
-  padding:0.2rem 0.6rem;border-radius:50px;
-}
-.exp-body{
-  padding:1.25rem 1.5rem;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:1.5rem;
-}
-.exp-bullets{list-style:none;display:flex;flex-direction:column;gap:0.6rem}
-.exp-bullets li{
-  font-size:0.84rem;color:var(--muted);
-  padding-left:1.2rem;position:relative;line-height:1.6;
-}
-.exp-bullets li::before{
-  content:'';
-  position:absolute;left:0;top:0.65em;
-  width:5px;height:5px;
-  border-radius:50%;
-  background:var(--accent);
-}
-.exp-kpi-grid{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:0.75rem;
-  align-content:start;
-}
-.kpi-box{
-  background:var(--paper);
-  border:1px solid var(--border);
-  border-radius:10px;
-  padding:1rem;
-  text-align:center;
-}
-.kpi-val{
-  font-family:'Fraunces',serif;
-  font-size:1.5rem;font-weight:700;
-  color:var(--ink);line-height:1;
-  margin-bottom:0.25rem;
-}
-.kpi-val span{color:var(--accent)}
-.kpi-key{font-size:0.62rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted)}
-
-/* ─── PROJECT ─── */
-.project-feature{
-  display:grid;
-  grid-template-columns:1.1fr 0.9fr;
-  gap:0;
-  border-radius:20px;
-  overflow:hidden;
-  border:1px solid var(--border);
-}
-.pf-left{
-  background:linear-gradient(145deg, var(--accent-light) 0%, var(--chalk) 60%);
-  padding:2.5rem;
-  border-right:1px solid var(--border);
-}
-.pf-eyebrow{
-  font-size:0.65rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;
-  color:var(--accent);
-  margin-bottom:1rem;
-}
-.pf-title{
-  font-family:'Fraunces',serif;
-  font-size:2.8rem;font-weight:700;
-  color:var(--ink);
-  letter-spacing:-0.02em;
-  line-height:1.1;
-  margin-bottom:0.5rem;
-}
-.pf-subtitle{
-  font-size:0.85rem;font-style:italic;
-  color:var(--muted);
-  margin-bottom:1.75rem;
-}
-.pf-desc{
-  font-size:0.9rem;
-  color:var(--muted);
-  line-height:1.8;
-  margin-bottom:2rem;
-}
-.pf-desc b{color:var(--ink)}
-.pf-tags{display:flex;flex-wrap:wrap;gap:0.4rem}
-.pf-tag{
-  background:var(--paper2);
-  border:1px solid var(--border);
-  color:var(--muted);
-  font-size:0.7rem;font-weight:700;letter-spacing:0.04em;
-  padding:0.3rem 0.7rem;border-radius:6px;
-}
-.pf-right{padding:2.5rem;background:var(--paper)}
-.pf-metrics-label{
-  font-size:0.65rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;
-  color:var(--muted);
-  margin-bottom:1.5rem;
-}
-.pf-metric-list{
-  display:flex;flex-direction:column;gap:0;
-  border:1px solid var(--border);
-  border-radius:12px;
-  overflow:hidden;
-  margin-bottom:2rem;
-  background:var(--chalk);
-}
-.pf-metric{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:1rem 1.25rem;
-  border-bottom:1px solid var(--border);
-}
-.pf-metric:last-child{border-bottom:none}
-.pf-metric-text{font-size:0.8rem;color:var(--muted)}
-.pf-metric-val{
-  font-family:'Fraunces',serif;
-  font-size:1.1rem;font-weight:700;
-  color:var(--ink);
-}
-.pf-metric-val b{color:var(--accent)}
-.pf-highlight{
-  background:var(--accent-light);
-  border:1px solid var(--accent-light2);
-  border-radius:10px;
-  padding:1rem 1.25rem;
-  font-size:0.82rem;
-  color:var(--accent-mid);
-  line-height:1.6;
-}
-.pf-highlight b{color:var(--accent-mid)}
-
-/* ─── EDUCATION ─── */
-.edu-grid{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:1.5rem;
-}
-.edu-card{
-  border:1px solid var(--border);
-  border-radius:16px;
-  overflow:hidden;
-  background:white;
-  transition:transform 0.2s,box-shadow 0.2s;
-}
-.edu-card:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,0.08)}
-.edu-header{
-  background:var(--paper);
-  padding:1.5rem 1.75rem;
-  border-bottom:1px solid var(--border);
-}
-.edu-school{
-  font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
-  color:var(--muted);margin-bottom:0.4rem;
-}
-.edu-degree{
-  font-family:'Fraunces',serif;
-  font-size:1.05rem;font-weight:700;
-  color:var(--ink);margin-bottom:0.2rem;
-}
-.edu-meta{font-size:0.78rem;color:var(--muted)}
-.edu-body{padding:1.5rem 1.75rem}
-.edu-gpa{
-  display:inline-flex;align-items:center;gap:0.5rem;
-  background:var(--success-light);
-  color:var(--success);
-  font-size:0.72rem;font-weight:700;
-  padding:0.3rem 0.75rem;border-radius:50px;
-  margin-bottom:1rem;
-}
-.edu-gpa::before{content:'★';font-size:0.7em}
-.course-list{display:flex;flex-wrap:wrap;gap:0.4rem}
-.ctag{
-  background:var(--paper2);
-  border:1px solid var(--border);
-  color:var(--muted);
-  font-size:0.65rem;font-weight:500;
-  padding:0.25rem 0.55rem;border-radius:5px;
-}
-
-/* ─── CONTACT ─── */
-.contact-wrap{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:3.5rem;align-items:center;
-}
-.contact-left .big-heading{
-  font-family:'Fraunces',serif;
-  font-size:clamp(2.5rem,5vw,4.5rem);
-  font-weight:700;
-  color:var(--ink);
-  line-height:1.05;
-  letter-spacing:-0.03em;
-  margin-bottom:1.5rem;
-}
-.contact-left .big-heading em{
-  font-style:italic;
-  color:transparent;
-  -webkit-text-stroke:1px rgba(15,17,23,0.22);
-}
-.contact-note{
-  font-size:0.9rem;
-  color:var(--muted);
-  line-height:1.75;
-}
-.contact-note b{color:var(--ink)}
-.clinks{display:flex;flex-direction:column;gap:0.5rem}
-.clink{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:1rem 1.25rem;
-  border:1px solid var(--border);
-  border-radius:12px;
-  background:var(--chalk);
-  text-decoration:none;
-  color:var(--ink);
-  font-size:0.85rem;font-weight:500;
-  transition:all 0.2s;
-}
-.clink:hover{
-  background:var(--accent-light);
-  border-color:var(--accent-light2);
-  transform:translateX(4px);
-}
-.clink-inner{display:flex;align-items:center;gap:0.9rem}
-.clink-ico{
-  width:34px;height:34px;
-  border-radius:8px;
-  background:var(--paper2);
-  border:1px solid var(--border);
-  display:flex;align-items:center;justify-content:center;
-}
-.clink-sub{font-size:0.65rem;color:var(--muted);margin-top:1px}
-.clink-arr{font-size:0.85rem;color:var(--muted);transition:transform 0.2s}
-.clink:hover .clink-arr{transform:translateX(3px);color:var(--accent)}
-
-/* ─── FOOTER ─── */
-footer{
-  background:var(--paper);
-  border-top:1px solid var(--border);
-  padding:1.75rem 3rem;
-  display:flex;align-items:center;justify-content:space-between;
-}
-.footer-brand{
-  font-family:'Fraunces',serif;
-  font-size:0.9rem;font-weight:700;
-  color:var(--muted);
-}
-.footer-brand b{color:var(--accent)}
-.footer-copy{font-size:0.7rem;color:var(--muted);letter-spacing:0.06em}
-
-/* ─── ANIMATIONS ─── */
-@keyframes rise{
-  from{opacity:0;transform:translateY(30px)}
-  to{opacity:1;transform:translateY(0)}
-}
-.fade-up{
-  opacity:0;transform:translateY(24px);
-  transition:opacity 0.65s ease,transform 0.65s ease;
-}
-.fade-up.visible{opacity:1;transform:none}
-
-@media(max-width:900px){
-  nav{padding:0 1.5rem}
-  .nav-links{display:none}
-  .hero,.section{padding-left:1.5rem;padding-right:1.5rem}
-  .hero-headline{font-size:3rem}
-  .hero-sub{grid-template-columns:1fr}
-  .hero-ctas{align-items:flex-start}
-  .identity-grid,.skills-layout,.exp-body,.edu-grid,.contact-wrap{grid-template-columns:1fr}
-  .impact-row{grid-template-columns:1fr 1fr}
-  .project-feature{grid-template-columns:1fr}
-  .pf-left{border-right:none;border-bottom:1px solid var(--border)}
-  .exp-card-top{grid-template-columns:auto 1fr}
-  .exp-right-meta{display:none}
-}
+  /* ---------- gentle reveal ---------- */
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
+<div class="topbar"></div>
 
-<!-- NAV -->
-<nav>
-  <a href="#" class="nav-logo">Sreya Somisetty</a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#project">Project</a></li>
-    <li><a href="#education">Education</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-main">
-    <div class="hero-tag">Backend · Distributed Systems · SJSU '27</div>
-    <h1 class="hero-headline">
-      I build systems<br>
-      <span class="line2">that don't break</span><br>
-      <span class="accent">at scale.</span>
-    </h1>
-    <div class="hero-sub">
-      <p class="hero-desc">
-        <strong>Senior Software Engineer</strong> with 6 years at Oracle and NCR.
-        I architect microservices, event-driven pipelines, and APIs that handle real load —
-        <strong>500K messages a day, 1M+ API calls a month,</strong> without missing a beat.
-      </p>
-      <div class="hero-ctas">
-        <a href="https://www.linkedin.com/in/sreya-s-b32395107/" target="_blank" class="cta-secondary">View LinkedIn ↗</a>
-      </div>
+<header>
+  <div class="wrap">
+    <span class="eyebrow">Portfolio</span>
+    <h1 class="serif">Sreya Somisetty</h1>
+    <p class="role">Backend &amp; Distributed Systems Engineer</p>
+    <p class="lede">I build high-throughput microservices and event-driven systems. Six years across Java and C# at Oracle and NCR, now completing an M.S. in Software Engineering at San José State University.</p>
+    <div class="links">
+      <a class="btn" href="mailto:sreyasomisetty@gmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Email</a>
+      <a class="btn" href="https://www.linkedin.com/in/sreyasomisetty/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM10 9h3.8v1.7h.1c.5-1 1.8-2 3.7-2 4 0 4.7 2.6 4.7 6V21h-4v-5.3c0-1.3 0-2.9-1.8-2.9s-2 1.4-2 2.8V21h-4z"/></svg>LinkedIn</a>
+      <a class="btn" href="https://github.com/SreyaSomisetty17" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.1-1.47-1.1-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.36 1.09 2.94.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg>GitHub</a>
     </div>
   </div>
-  <div class="hero-scroll-bar">
-    <div class="hero-stat">
-      <div class="hero-stat-num">6<sup>+</sup></div>
-      <div class="hero-stat-label">Years exp</div>
-    </div>
-    <div class="hero-stat-sep"></div>
-    <div class="hero-stat">
-      <div class="hero-stat-num">1M<sup>+</sup></div>
-      <div class="hero-stat-label">Req / month</div>
-    </div>
-    <div class="hero-stat-sep"></div>
-    <div class="hero-stat">
-      <div class="hero-stat-num">50<sup>%</sup></div>
-      <div class="hero-stat-label">MTTR reduced</div>
-    </div>
-    <div class="hero-stat-sep"></div>
-    <div class="hero-stat">
-      <div class="hero-stat-num">65<sup>%</sup></div>
-      <div class="hero-stat-label">DB speed gain</div>
-    </div>
-    <div class="hero-location">San Jose, CA · Open to work</div>
-  </div>
-</section>
+</header>
 
-<!-- MARQUEE -->
-<div class="marquee-strip">
-  <div class="marquee-track">
-    <span>Java</span><span>Spring Boot</span><span>Apache Kafka</span>
-    <span>Helidon MP</span><span>Microservices</span><span>AWS</span>
-    <span>Kubernetes</span><span>Prometheus</span><span>Grafana</span>
-    <span>PostgreSQL</span><span>Redis</span><span>Python</span>
-    <span>C# .NET</span><span>REST APIs</span><span>Docker</span>
-    <span>ELK Stack</span><span>Agile / Scrum</span>
-    <!-- duplicate for infinite effect -->
-    <span>Java</span><span>Spring Boot</span><span>Apache Kafka</span>
-    <span>Helidon MP</span><span>Microservices</span><span>AWS</span>
-    <span>Kubernetes</span><span>Prometheus</span><span>Grafana</span>
-    <span>PostgreSQL</span><span>Redis</span><span>Python</span>
-    <span>C# .NET</span><span>REST APIs</span><span>Docker</span>
-    <span>ELK Stack</span><span>Agile / Scrum</span>
-  </div>
-</div>
+<main>
+  <!-- ============ SELECTED WORK ============ -->
+  <section id="work">
+    <div class="wrap">
+      <div class="sec-head reveal"><h2 class="serif">Selected work</h2><span class="rule"></span></div>
 
-<!-- ABOUT -->
-<section class="section" id="about">
-  <div class="container">
-    <div class="identity-grid fade-up">
-      <div class="identity-left">
-        <div class="section-eyebrow">Who I am</div>
-        <blockquote class="big-quote">"I don't just write code <br>I engineer reliability."</blockquote>
-        <p>Backend engineer with 6 years building distributed systems at Oracle and NCR from a Kafka-powered SMS platform processing 500K+ daily messages, to slashing database response times by 70% for 500+ clients. Currently pursuing my <strong>M.S. in Software Engineering at SJSU</strong>, applying that same systems thinking to AI-assisted tooling.</p>
-        <div class="stack-chips">
-          <span class="chip hot">Java</span>
-          <span class="chip hot">Apache Kafka</span>
-          <span class="chip hot">Spring Boot</span>
-          <span class="chip hot">Microservices</span>
-          <span class="chip">AWS</span>
-          <span class="chip">Python</span>
-          <span class="chip">Kubernetes</span>
-          <span class="chip">PostgreSQL</span>
+      <!-- 1 · ORACLE SMS -->
+      <article class="card reveal">
+        <div class="ctx">Oracle · Enterprise messaging platform</div>
+        <h3>Eloqua SMS platform: event-driven messaging at scale</h3>
+        <div class="field"><span class="lab">Problem</span><span class="val">Oracle's marketing-automation suite needed an SMS module that could sustain high daily volume with reliable, accurate delivery reporting, with no existing service to build on.</span></div>
+        <div class="field"><span class="lab">Approach</span><span class="val">Built the module's Java microservices from scratch on the Helidon MP framework, using Kafka consumers for event-driven processing. Layered REST APIs across C# (.NET) and Java to handle the request load, with an automatic token-refresh mechanism for uninterrupted authentication, and designed the backend for a consolidated delivery-status view.</span></div>
+        <div class="field"><span class="lab">Decision</span><span class="val">Chose an event-driven pipeline over synchronous processing so the system could absorb spikes, and paired it with proactive observability rather than reactive support: dashboards that surfaced real-time data-propagation delays before they became incidents.</span></div>
+        <div class="field"><span class="lab">Result</span><span class="val">A platform sustaining heavy daily throughput with materially fewer production incidents and faster recovery, backed by targeted database tuning.</span></div>
+        <div class="diagram">
+          <div class="dcap">Architecture · event-driven SMS pipeline</div>
+          <svg viewBox="0 0 640 232" role="img" aria-label="Event-driven SMS pipeline: REST APIs publish to Apache Kafka, consumed by SMS microservices that write to delivery stores and a consolidated status view, with Prometheus and Grafana observability across the pipeline.">
+            <defs>
+              <marker id="ar1" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6.5,3 L0,6 z" fill="#6d7480"/></marker>
+              <marker id="ar1a" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6.5,3 L0,6 z" fill="#43625c"/></marker>
+            </defs>
+            <!-- ingress -->
+            <text x="16" y="30" font-size="11" fill="#8a909b">requests</text>
+            <line x1="16" y1="40" x2="16" y2="74" stroke="#c7c2b6" stroke-width="1.4"/>
+            <line x1="16" y1="74" x2="14" y2="74" stroke="#6d7480" stroke-width="1.4" marker-end="url(#ar1)"/>
+            <!-- boxes -->
+            <g>
+              <rect x="14" y="46" width="138" height="58" rx="10" fill="#ffffff" stroke="#d8d3c7"/>
+              <text x="83" y="70" text-anchor="middle" font-size="12.5" font-weight="600" fill="#2b2f37">REST APIs</text>
+              <text x="83" y="88" text-anchor="middle" font-size="11" fill="#6d7480">C# / .NET · Java</text>
+            </g>
+            <g>
+              <rect x="176" y="46" width="138" height="58" rx="10" fill="#e7ece9" stroke="#43625c"/>
+              <text x="245" y="70" text-anchor="middle" font-size="12.5" font-weight="600" fill="#33504b">Apache Kafka</text>
+              <text x="245" y="88" text-anchor="middle" font-size="11" fill="#5c7a73">event stream</text>
+            </g>
+            <g>
+              <rect x="338" y="46" width="138" height="58" rx="10" fill="#e7ece9" stroke="#43625c"/>
+              <text x="407" y="70" text-anchor="middle" font-size="12.5" font-weight="600" fill="#33504b">SMS microservices</text>
+              <text x="407" y="88" text-anchor="middle" font-size="11" fill="#5c7a73">Kafka consumers</text>
+            </g>
+            <g>
+              <rect x="500" y="46" width="138" height="58" rx="10" fill="#ffffff" stroke="#d8d3c7"/>
+              <text x="569" y="70" text-anchor="middle" font-size="12.5" font-weight="600" fill="#2b2f37">Delivery stores</text>
+              <text x="569" y="88" text-anchor="middle" font-size="11" fill="#6d7480">+ Consolidated Status</text>
+            </g>
+            <!-- flow arrows -->
+            <line x1="152" y1="75" x2="176" y2="75" stroke="#6d7480" stroke-width="1.6" marker-end="url(#ar1)"/>
+            <line x1="314" y1="75" x2="338" y2="75" stroke="#6d7480" stroke-width="1.6" marker-end="url(#ar1)"/>
+            <line x1="476" y1="75" x2="500" y2="75" stroke="#6d7480" stroke-width="1.6" marker-end="url(#ar1)"/>
+            <!-- observability band -->
+            <rect x="176" y="150" width="462" height="50" rx="12" fill="#e7ece9" fill-opacity="0.55" stroke="#43625c" stroke-dasharray="5 4"/>
+            <text x="407" y="180" text-anchor="middle" font-size="12" font-weight="600" fill="#33504b">Observability · Prometheus / Grafana</text>
+            <g stroke="#5c7a73" stroke-width="1.3" stroke-dasharray="3 3" marker-end="url(#ar1a)">
+              <line x1="245" y1="150" x2="245" y2="106"/>
+              <line x1="407" y1="150" x2="407" y2="106"/>
+              <line x1="569" y1="150" x2="569" y2="106"/>
+            </g>
+          </svg>
         </div>
-      </div>
-      <div class="identity-right">
-        <div class="timeline-v">
-          <div class="tl-item">
-            <div class="tl-date">2025 →</div>
-            <div class="tl-dot"></div>
-            <div class="tl-content">
-              <div class="tl-company">San Jose State University</div>
-              <div class="tl-role">M.S. Software Engineering</div>
-              <div class="tl-desc">Focused on cloud infrastructure, distributed systems, and enterprise software. Building AI-powered debugging tools as graduate project.</div>
-            </div>
-          </div>
-          <div class="tl-item">
-            <div class="tl-date">2021–2025</div>
-            <div class="tl-dot"></div>
-            <div class="tl-content">
-              <div class="tl-company">Oracle Private Ltd</div>
-              <div class="tl-role">Senior Software Engineer</div>
-              <div class="tl-desc">Owned the Eloqua SMS microservice platform. Built <b>15+ production APIs</b>, established monitoring infra, and drove a <b>95% improvement in tracking accuracy</b>.</div>
-            </div>
-          </div>
-          <div class="tl-item">
-            <div class="tl-date">2019–2021</div>
-            <div class="tl-dot"></div>
-            <div class="tl-content">
-              <div class="tl-company">NCR Corporation</div>
-              <div class="tl-role">Software Engineer</div>
-              <div class="tl-desc">Rebuilt reporting infrastructure for 500+ clients. Eliminated SQL bottlenecks that had plagued the system, reducing DB response times by <b>70%</b>.</div>
-            </div>
-          </div>
-          <div class="tl-item">
-            <div class="tl-date">2015–2019</div>
-            <div class="tl-dot"></div>
-            <div class="tl-content">
-              <div class="tl-company">Osmania University</div>
-              <div class="tl-role">B.E. Information Technology</div>
-              <div class="tl-desc">Graduated with <b>8.83/10 GPA</b>. Built foundational expertise in algorithms, operating systems, and object-oriented design.</div>
-            </div>
-          </div>
+        <div class="stats">
+          <span class="stat">500K+ messages / day</span>
+          <span class="stat">1M+ API requests / month</span>
+          <span class="stat">40% fewer incidents</span>
+          <span class="stat">~30% faster stored procedures</span>
+        </div>
+        <div class="tags">
+          <span class="tag">Java</span><span class="tag">Helidon MP</span><span class="tag">Apache Kafka</span><span class="tag">C# / .NET</span><span class="tag">REST APIs</span><span class="tag">Prometheus</span><span class="tag">Grafana</span><span class="tag">PL/SQL</span>
+        </div>
+        <p class="private-note">Proprietary work at Oracle. Happy to walk through the architecture and trade-offs in a conversation.</p>
+      </article>
+
+      <!-- 2 · APPLENS -->
+      <article class="card reveal">
+        <div class="ctx">San José State University · 2025</div>
+        <h3>AppLens: AI-assisted microservice debugging</h3>
+        <div class="field"><span class="lab">Problem</span><span class="val">When something breaks across dozens of interconnected microservices, finding the root cause is slow, manual, and easy to get wrong.</span></div>
+        <div class="field"><span class="lab">Approach</span><span class="val">Built a full-stack debugging platform for 50+ microservices that maps service dependencies and visualizes them, then layers AI agents over the logs and traces to correlate failures across services and point toward the likely cause.</span></div>
+        <div class="field"><span class="lab">Decision</span><span class="val">Anchored the AI on an explicit dependency graph rather than raw logs alone, so suggestions are grounded in how the services actually relate, not just pattern-matched text.</span></div>
+        <div class="field"><span class="lab">Result</span><span class="val">Cut the manual effort of tracing a failure to its source by roughly 60%.</span></div>
+        <div class="diagram">
+          <div class="dcap">Architecture · dependency graph + AI root-cause</div>
+          <svg viewBox="0 0 640 214" role="img" aria-label="AppLens maps 50+ services into a dependency graph; AI agents correlate logs and traces to point at the likely root-cause service.">
+            <defs>
+              <marker id="ar2a" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6.5,3 L0,6 z" fill="#43625c"/></marker>
+            </defs>
+            <!-- edges -->
+            <g stroke="#cfc9bc" stroke-width="1.4">
+              <line x1="70" y1="52" x2="182" y2="42"/>
+              <line x1="70" y1="52" x2="150" y2="126"/>
+              <line x1="182" y1="42" x2="268" y2="92"/>
+              <line x1="182" y1="42" x2="150" y2="126"/>
+              <line x1="268" y1="92" x2="150" y2="126"/>
+              <line x1="150" y1="126" x2="66" y2="150"/>
+              <line x1="150" y1="126" x2="258" y2="168"/>
+              <line x1="268" y1="92" x2="258" y2="168"/>
+            </g>
+            <!-- service nodes -->
+            <g font-size="11" fill="#6d7480" text-anchor="middle">
+              <circle cx="70" cy="52" r="16" fill="#ffffff" stroke="#cfc9bc"/><text x="70" y="56">S1</text>
+              <circle cx="182" cy="42" r="16" fill="#ffffff" stroke="#cfc9bc"/><text x="182" y="46">S2</text>
+              <circle cx="268" cy="92" r="16" fill="#ffffff" stroke="#cfc9bc"/><text x="268" y="96">S3</text>
+              <circle cx="66" cy="150" r="16" fill="#ffffff" stroke="#cfc9bc"/><text x="66" y="154">S5</text>
+              <circle cx="258" cy="168" r="16" fill="#ffffff" stroke="#cfc9bc"/><text x="258" y="172">S6</text>
+              <circle cx="150" cy="126" r="18" fill="#e7ece9" stroke="#43625c" stroke-width="2.4"/><text x="150" y="130" fill="#33504b" font-weight="600">S4</text>
+            </g>
+            <text x="165" y="205" text-anchor="middle" font-size="10.5" fill="#8a909b">Service dependency graph · 50+ services</text>
+            <!-- AI box -->
+            <text x="520" y="52" text-anchor="middle" font-size="10.5" fill="#8a909b">logs · traces</text>
+            <line x1="520" y1="58" x2="520" y2="70" stroke="#5c7a73" stroke-width="1.3" stroke-dasharray="3 3" marker-end="url(#ar2a)"/>
+            <rect x="422" y="72" width="196" height="72" rx="12" fill="#e7ece9" stroke="#43625c"/>
+            <text x="520" y="103" text-anchor="middle" font-size="13" font-weight="600" fill="#33504b">AI agents</text>
+            <text x="520" y="122" text-anchor="middle" font-size="11" fill="#5c7a73">correlate logs &amp; traces</text>
+            <!-- pointer to root cause -->
+            <line x1="422" y1="108" x2="170" y2="126" stroke="#43625c" stroke-width="1.6" stroke-dasharray="6 4" marker-end="url(#ar2a)"/>
+            <text x="356" y="163" text-anchor="middle" font-size="10.5" fill="#43625c" font-weight="600">likely root cause</text>
+          </svg>
+        </div>
+        <div class="stats">
+          <span class="stat">50+ services mapped</span>
+          <span class="stat">~60% less debugging time</span>
+        </div>
+        <div class="tags">
+          <span class="tag">Python</span><span class="tag">TypeScript</span><span class="tag">REST APIs</span><span class="tag">Docker</span><span class="tag">Jenkins</span><span class="tag">OpenAI API</span>
+        </div>
+        <div class="cardlinks">
+          <!-- Replace the href below with the exact AppLens repo URL when it's public -->
+          <a href="https://github.com/TanmayRanaware/AppLens" target="_blank" rel="noopener">View code&nbsp;→</a>
+        </div>
+      </article>
+
+      <!-- 3 · CHORD DHT -->
+      <article class="card reveal">
+        <div class="ctx">San José State University · 2026</div>
+        <h3>Distributed Coordination Layer (Chord DHT)</h3>
+        <div class="field"><span class="lab">Problem</span><span class="val">Coordinating work across edge and IoT nodes usually leans on a central coordinator, which is a single point of failure and a scaling bottleneck.</span></div>
+        <div class="field"><span class="lab">Approach</span><span class="val">Built a decentralized, peer-to-peer coordination layer on a Chord distributed hash table. Nodes self-organize into a consistent-hash ring with O(log N) routing and no central authority, exposing task and job APIs over REST and gRPC.</span></div>
+        <div class="field"><span class="lab">Decision</span><span class="val">Made fault tolerance first-class: k-successor replication with quorum writes and a self-healing stabilization protocol, plus AI-assisted job placement that falls back to a deterministic heuristic when needed.</span></div>
+        <div class="field"><span class="lab">Result</span><span class="val">A resilient, self-healing system validated by a 71-test suite and deployed via Docker Compose on AWS EC2.</span></div>
+        <div class="diagram">
+          <div class="dcap">Architecture · Chord distributed hash table</div>
+          <svg viewBox="0 0 640 268" role="img" aria-label="A Chord consistent-hash ring of six nodes with clockwise successor pointers and an O(log N) finger-routed key lookup, with no central coordinator.">
+            <defs>
+              <marker id="ar3" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6.5,3 L0,6 z" fill="#6d7480"/></marker>
+              <marker id="ar3a" markerWidth="10" markerHeight="10" refX="6.5" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#43625c"/></marker>
+            </defs>
+            <!-- ring -->
+            <circle cx="188" cy="134" r="96" fill="none" stroke="#d8d3c7" stroke-width="1.5"/>
+            <!-- clockwise successor hints -->
+            <g fill="none" stroke="#9aa3a0" stroke-width="1.4" marker-end="url(#ar3)">
+              <path d="M211,41 A96,96 0 0 1 257,67"/>
+              <path d="M165,227 A96,96 0 0 1 119,201"/>
+            </g>
+            <!-- finger lookup path -->
+            <line x1="105" y1="86" x2="271" y2="182" stroke="#43625c" stroke-width="1.7" stroke-dasharray="6 4" marker-end="url(#ar3a)"/>
+            <line x1="271" y1="182" x2="188" y2="230" stroke="#43625c" stroke-width="1.7" stroke-dasharray="6 4" marker-end="url(#ar3a)"/>
+            <!-- nodes -->
+            <g font-size="11" text-anchor="middle">
+              <circle cx="188" cy="38" r="15" fill="#ffffff" stroke="#43625c"/><text x="188" y="42" fill="#6d7480">N0</text>
+              <circle cx="271" cy="86" r="15" fill="#ffffff" stroke="#43625c"/><text x="271" y="90" fill="#6d7480">N1</text>
+              <circle cx="271" cy="182" r="15" fill="#ffffff" stroke="#43625c"/><text x="271" y="186" fill="#6d7480">N2</text>
+              <circle cx="188" cy="230" r="16" fill="#e7ece9" stroke="#43625c" stroke-width="2.4"/><text x="188" y="234" fill="#33504b" font-weight="600">N3</text>
+              <circle cx="105" cy="182" r="15" fill="#ffffff" stroke="#43625c"/><text x="105" y="186" fill="#6d7480">N4</text>
+              <circle cx="105" cy="86" r="15" fill="#e7ece9" stroke="#43625c"/><text x="105" y="90" fill="#33504b">N5</text>
+            </g>
+            <text x="82" y="72" text-anchor="end" font-size="10.5" fill="#43625c" font-weight="600">key</text>
+            <text x="188" y="256" text-anchor="middle" font-size="10.5" fill="#43625c" font-weight="600">target</text>
+            <!-- legend -->
+            <g font-size="12.5" fill="#3c414b">
+              <circle cx="372" cy="66" r="3.5" fill="#43625c"/><text x="386" y="70">No central coordinator</text>
+              <circle cx="372" cy="104" r="3.5" fill="#43625c"/><text x="386" y="108">O(log N) finger routing</text>
+              <circle cx="372" cy="142" r="3.5" fill="#43625c"/><text x="386" y="146">k-successor replication · quorum writes</text>
+              <circle cx="372" cy="180" r="3.5" fill="#43625c"/><text x="386" y="184">Self-healing stabilization</text>
+            </g>
+          </svg>
+        </div>
+        <div class="stats">
+          <span class="stat">O(log N) routing</span>
+          <span class="stat">Quorum-based replication</span>
+          <span class="stat">71-test suite</span>
+        </div>
+        <div class="tags">
+          <span class="tag">Python</span><span class="tag">gRPC</span><span class="tag">REST</span><span class="tag">Docker</span><span class="tag">AWS EC2</span><span class="tag">Prometheus</span><span class="tag">Grafana</span><span class="tag">pytest</span>
+        </div>
+        <div class="cardlinks">
+          <!-- Replace the href below with the exact Chord DHT repo URL -->
+          <a href="https://github.com/ragwort15/Distributed_Chord_Infrastructure" target="_blank" rel="noopener">View code&nbsp;→</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ EXPERIENCE ============ -->
+  <section id="experience">
+    <div class="wrap">
+      <div class="sec-head reveal"><h2 class="serif">Experience</h2><span class="rule"></span></div>
+      <div class="xp reveal">
+        <div class="item">
+          <div class="r">Senior Software Engineer</div>
+          <div class="c">Oracle India Private Limited · Hyderabad, India</div>
+          <div class="d">Aug 2021 – Jul 2025</div>
+          <div class="n">Built and scaled backend microservices for the Eloqua SMS platform, owning event-driven pipelines, REST APIs, database performance, and observability.</div>
+        </div>
+        <div class="item">
+          <div class="r">Software Engineer I</div>
+          <div class="c">NCR Corporation · Hyderabad, India</div>
+          <div class="d">Jul 2019 – Aug 2021</div>
+          <div class="n">Improved a reporting module's efficiency and resolved SQL performance bottlenecks, while supporting deployments and day-to-day production reliability.</div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- SKILLS -->
-<section class="section light" id="skills">
-  <div class="container">
-    <div class="section-eyebrow fade-up">Technical Skills</div>
-    <h2 class="section-title fade-up">What I work with</h2>
-    <div class="skills-layout fade-up">
-      <div class="skill-panel">
-        <div class="sp-head">
-          <div class="sp-icon">⚙</div>
-          <div class="sp-cat">Languages</div>
-        </div>
-        <div class="sp-tags">
-          <span class="sp-tag core">Java (J2EE)</span>
-          <span class="sp-tag core">Python</span>
-          <span class="sp-tag core">C#</span>
-          <span class="sp-tag">SQL / PL-SQL</span>
-          <span class="sp-tag">TypeScript</span>
-          <span class="sp-tag">JavaScript</span>
-          <span class="sp-tag">C++</span>
-        </div>
-      </div>
-      <div class="skill-panel">
-        <div class="sp-head">
-          <div class="sp-icon">🔧</div>
-          <div class="sp-cat">Frameworks</div>
-        </div>
-        <div class="sp-tags">
-          <span class="sp-tag core">Spring Boot</span>
-          <span class="sp-tag core">Helidon MP</span>
-          <span class="sp-tag">.NET 4.8</span>
-          <span class="sp-tag">ASP.NET</span>
-          <span class="sp-tag">React</span>
-        </div>
-      </div>
-      <div class="skill-panel">
-        <div class="sp-head">
-          <div class="sp-icon">🔀</div>
-          <div class="sp-cat">Backend & Distributed</div>
-        </div>
-        <div class="sp-tags">
-          <span class="sp-tag core">Microservices</span>
-          <span class="sp-tag core">Apache Kafka</span>
-          <span class="sp-tag">REST APIs</span>
-          <span class="sp-tag">Event-Driven</span>
-          <span class="sp-tag">Async Processing</span>
-        </div>
-      </div>
-      <div class="skill-panel">
-        <div class="sp-head">
-          <div class="sp-icon">☁</div>
-          <div class="sp-cat">Cloud & DevOps</div>
-        </div>
-        <div class="sp-tags">
-          <span class="sp-tag core">AWS (EC2, S3, Lambda)</span>
-          <span class="sp-tag">Docker</span>
-          <span class="sp-tag">Kubernetes</span>
-          <span class="sp-tag">Jenkins</span>
-          <span class="sp-tag">Git</span>
-        </div>
-      </div>
-      <div class="skill-panel">
-        <div class="sp-head">
-          <div class="sp-icon">🗄</div>
-          <div class="sp-cat">Databases</div>
-        </div>
-        <div class="sp-tags">
-          <span class="sp-tag core">MySQL</span>
-          <span class="sp-tag core">PostgreSQL</span>
-          <span class="sp-tag">MS SQL Server</span>
-          <span class="sp-tag">Redis</span>
-          <span class="sp-tag">DB Tuning</span>
-        </div>
-      </div>
-      <div class="skill-panel">
-        <div class="sp-head">
-          <div class="sp-icon">📊</div>
-          <div class="sp-cat">Observability & Testing</div>
-        </div>
-        <div class="sp-tags">
-          <span class="sp-tag core">Prometheus</span>
-          <span class="sp-tag core">Grafana</span>
-          <span class="sp-tag">ELK / Kibana</span>
-          <span class="sp-tag">JUnit</span>
-          <span class="sp-tag">Mockito</span>
-          <span class="sp-tag">Postman</span>
+  <!-- ============ ABOUT ============ -->
+  <section id="about" class="about">
+    <div class="wrap">
+      <div class="sec-head reveal"><h2 class="serif">About</h2><span class="rule"></span></div>
+      <div class="reveal">
+        <p>I'm a backend engineer who enjoys the quieter, load-bearing parts of a system: the queues, the data paths, and the failure modes that decide whether something holds up under real traffic. I care about designs that stay calm when things go wrong.</p>
+        <p>I'm currently deepening that focus through an M.S. in Software Engineering, with coursework in cloud computing and distributed systems.</p>
+        <div class="edu">
+          <div class="e"><b>M.S. Software Engineering</b>, San José State University <span>· 2025–2027</span></div>
+          <div class="e"><b>B.E. Information Technology</b>, Osmania University <span>· 2015–2019</span></div>
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- EXPERIENCE -->
-<section class="section chalk" id="experience">
-  <div class="container">
-    <div class="section-eyebrow fade-up">Work Experience</div>
-    <h2 class="section-title fade-up">Where I've made impact</h2>
-
-    <div class="impact-row fade-up">
-      <div class="impact-cell">
-        <div class="impact-num">500K<span>+</span></div>
-        <div class="impact-label">Messages processed<br>daily</div>
-      </div>
-      <div class="impact-cell">
-        <div class="impact-num">1M<span>+</span></div>
-        <div class="impact-label">API requests<br>per month</div>
-      </div>
-      <div class="impact-cell">
-        <div class="impact-num">95<span>%</span></div>
-        <div class="impact-label">Tracking accuracy<br>improvement</div>
-      </div>
-      <div class="impact-cell">
-        <div class="impact-num">70<span>%</span></div>
-        <div class="impact-label">Faster DB<br>response time</div>
-      </div>
-    </div>
-
-    <div class="exp-list">
-      <div class="exp-card fade-up">
-        <div class="exp-card-top">
-          <div class="exp-logo-box">Or</div>
-          <div class="exp-meta-col">
-            <div class="exp-company-name">Oracle Private Ltd</div>
-            <div class="exp-role-title">Senior Software Engineer · Hyderabad, India</div>
-          </div>
-          <div class="exp-right-meta">
-            <div class="exp-period">Aug 2021 – Jul 2025</div>
-            <span class="exp-dur">4 years</span>
-          </div>
-        </div>
-        <div class="exp-body">
-          <ul class="exp-bullets">
-            <li>Architected Eloqua SMS microservices (Helidon MP + Kafka) processing 500K+ daily messages at P99 latency; built 15+ REST APIs serving 1M+ monthly requests at sub-200ms.</li>
-            <li>Consolidated SMS status tracking logic, boosting accuracy by 95% and cutting customer complaints by 60%.</li>
-            <li>Indexed 12 high-traffic tables, refactored PL/SQL query speed up 65%, CPU down 30%. Prometheus + Grafana monitoring cut MTTR by 50% across 5+ services.</li>
-          </ul>
-          <div class="exp-kpi-grid">
-            <div class="kpi-box">
-              <div class="kpi-val">500K<span>+</span></div>
-              <div class="kpi-key">msgs / day</div>
-            </div>
-            <div class="kpi-box">
-              <div class="kpi-val">15<span>+</span></div>
-              <div class="kpi-key">APIs built</div>
-            </div>
-            <div class="kpi-box">
-              <div class="kpi-val">65<span>%</span></div>
-              <div class="kpi-key">query speed↑</div>
-            </div>
-            <div class="kpi-box">
-              <div class="kpi-val">50<span>%</span></div>
-              <div class="kpi-key">MTTR reduced</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="exp-card fade-up">
-        <div class="exp-card-top">
-          <div class="exp-logo-box">NC</div>
-          <div class="exp-meta-col">
-            <div class="exp-company-name">NCR Corporation</div>
-            <div class="exp-role-title">Software Engineer · Hyderabad, India</div>
-          </div>
-          <div class="exp-right-meta">
-            <div class="exp-period">Jul 2019 – Aug 2021</div>
-            <span class="exp-dur">2 years</span>
-          </div>
-        </div>
-        <div class="exp-body">
-          <ul class="exp-bullets">
-            <li>Refactored reporting module for 500+ clients using multi-threading, cutting processing time by 50% on 1M+ record datasets.</li>
-            <li>Eliminated SQL bottlenecks via stored procedure optimization — DB response 70% faster, server load down 45%.</li>
-            <li>Built deployment protocols and rollback strategies (60% less downtime); led Agile ceremonies improving sprint velocity by 25%.</li>
-          </ul>
-          <div class="exp-kpi-grid">
-            <div class="kpi-box">
-              <div class="kpi-val">70<span>%</span></div>
-              <div class="kpi-key">faster DB</div>
-            </div>
-            <div class="kpi-box">
-              <div class="kpi-val">500<span>+</span></div>
-              <div class="kpi-key">clients served</div>
-            </div>
-            <div class="kpi-box">
-              <div class="kpi-val">60<span>%</span></div>
-              <div class="kpi-key">less downtime</div>
-            </div>
-            <div class="kpi-box">
-              <div class="kpi-val">25<span>%</span></div>
-              <div class="kpi-key">velocity gain</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROJECT -->
-<section class="section light" id="project">
-  <div class="container">
-    <div class="section-eyebrow fade-up">Featured Project</div>
-    <h2 class="section-title fade-up">Graduate work</h2>
-    <div class="project-feature fade-up">
-      <div class="pf-left">
-        <div class="pf-eyebrow">SJSU · Graduate Project</div>
-        <h3 class="pf-title">AppLens</h3>
-        <div class="pf-subtitle">AI-Assisted Microservice Debugging Platform</div>
-        <p class="pf-desc">
-          Debugging distributed systems means hunting through thousands of log lines across services to find one root cause. <b>AppLens automates that.</b> AI agents ingest 500K+ daily logs, correlate failures across 50+ microservices, and surface root causes automatically turning hours into minutes.
-        </p>
-        <div class="pf-tags">
-          <span class="pf-tag">Python</span>
-          <span class="pf-tag">TypeScript</span>
-          <span class="pf-tag">Docker</span>
-          <span class="pf-tag">Jenkins</span>
-          <span class="pf-tag">OpenAI API</span>
-          <span class="pf-tag">REST APIs</span>
-          <span class="pf-tag">Observability</span>
-        </div>
-      </div>
-      <div class="pf-right">
-        <div class="pf-metrics-label">By the numbers</div>
-        <div class="pf-metric-list">
-          <div class="pf-metric">
-            <span class="pf-metric-text">Microservices supported</span>
-            <span class="pf-metric-val"><b>50+</b></span>
-          </div>
-          <div class="pf-metric">
-            <span class="pf-metric-text">Logs & traces ingested daily</span>
-            <span class="pf-metric-val"><b>500K+</b></span>
-          </div>
-          <div class="pf-metric">
-            <span class="pf-metric-text">Faster root-cause detection</span>
-            <span class="pf-metric-val"><b>80%</b></span>
-          </div>
-          <div class="pf-metric">
-            <span class="pf-metric-text">Failure prediction accuracy</span>
-            <span class="pf-metric-val"><b>90%</b></span>
-          </div>
-          <div class="pf-metric">
-            <span class="pf-metric-text">Manual debug time saved</span>
-            <span class="pf-metric-val"><b>60%</b></span>
-          </div>
-        </div>
-        <div class="pf-highlight">
-          Combines <b>dependency graph analysis</b> with AI-driven log correlation, the same pattern used by enterprise observability platforms, built from scratch.
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- EDUCATION -->
-<section class="section chalk" id="education">
-  <div class="container">
-    <div class="section-eyebrow fade-up">Education</div>
-    <h2 class="section-title fade-up">Academic foundation</h2>
-    <div class="edu-grid fade-up">
-      <div class="edu-card">
-        <div class="edu-header">
-          <div class="edu-school">San Jose State University · San Jose, CA</div>
-          <div class="edu-degree">M.S. Software Engineering</div>
-          <div class="edu-meta">Aug 2025 – May 2027 (Expected)</div>
-        </div>
-        <div class="edu-body">
-          <div class="edu-gpa">GPA 3.33 / 4.0</div>
-          <div class="course-list">
-            <span class="ctag">Cloud Computing</span>
-            <span class="ctag">Enterprise Distributed Systems</span>
-            <span class="ctag">Data Mining</span>
-            <span class="ctag">Enterprise Software Platforms</span>
-          </div>
-        </div>
-      </div>
-      <div class="edu-card">
-        <div class="edu-header">
-          <div class="edu-school">Osmania University · Hyderabad, India</div>
-          <div class="edu-degree">B.E. Information Technology</div>
-          <div class="edu-meta">Aug 2015 – May 2019</div>
-        </div>
-        <div class="edu-body">
-          <div class="edu-gpa">GPA 8.83 / 10.0</div>
-          <div class="course-list">
-            <span class="ctag">Data Structures & Algorithms</span>
-            <span class="ctag">Operating Systems</span>
-            <span class="ctag">DBMS</span>
-            <span class="ctag">Object-Oriented Programming</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section class="section chalk" id="contact">
-  <div class="container">
-    <div class="contact-wrap fade-up">
-      <div class="contact-left">
-        <h2 class="big-heading">Open to<br><em>great work.</em></h2>
-        <p class="contact-note">
-          I'm actively looking for backend and platform engineering roles where I can work on challenging infrastructure at scale.<br><br>
-          Whether it's a quick intro or a specific role in mind — <b>I'd love to hear from you.</b>
-        </p>
-      </div>
-      <div class="clinks">
-        <a href="mailto:sreya.somisetty@sjsu.edu" class="clink">
-          <div class="clink-inner">
-            <div class="clink-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-            <div>
-              <div>sreya.somisetty@sjsu.edu</div>
-              <div class="clink-sub">Email</div>
-            </div>
-          </div>
-          <span class="clink-arr">→</span>
-        </a>
-        <a href="https://www.linkedin.com/in/sreya-s-b32395107/" target="_blank" class="clink">
-          <div class="clink-inner">
-            <div class="clink-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></div>
-            <div>
-              <div>https://www.linkedin.com/in/sreya-s-b32395107/</div>
-              <div class="clink-sub">LinkedIn</div>
-            </div>
-          </div>
-          <span class="clink-arr">→</span>
-        </a>
-        <a href="tel:+14085496137" class="clink">
-          <div class="clink-inner">
-            <div class="clink-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81a19.79 19.79 0 01-3.07-8.7A2 2 0 012.18 2H5.1a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.08 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div>
-            <div>
-              <div>+1 (408) 549-6137</div>
-              <div class="clink-sub">Phone</div>
-            </div>
-          </div>
-          <span class="clink-arr">→</span>
-        </a>
-        <a href="https://github.com/SreyaSomisetty17/" target="_blank" class="clink">
-          <div class="clink-inner">
-            <div class="clink-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg></div>
-            <div>
-              <div>github.com/SreyaSomisetty17</div>
-              <div class="clink-sub">GitHub</div>
-            </div>
-          </div>
-          <span class="clink-arr">→</span>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
+</main>
 
 <footer>
-  <span class="footer-brand">Sreya Somisetty</span>
-  <span class="footer-copy">© 2025 · Built with intention · San Jose, CA</span>
+  <div class="wrap">
+    <div class="fname serif">Sreya Somisetty</div>
+    <div class="links">
+      <a class="btn" href="mailto:sreyasomisetty@gmail.com">Email</a>
+      <a class="btn" href="https://www.linkedin.com/in/sreyasomisetty/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn" href="https://github.com/SreyaSomisetty17" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <div class="fine">Backend &amp; distributed systems · San José, CA</div>
+  </div>
 </footer>
 
 <script>
-// Scroll reveal
-const io=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}});
-},{threshold:0.08});
-document.querySelectorAll('.fade-up').forEach(el=>io.observe(el));
-
+  // gentle scroll reveal, with a safety fallback so nothing can stay hidden
+  var els=document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12});
+    els.forEach(function(el){io.observe(el);});
+    // fallback: reveal everything after 1.6s regardless (covers non-scroll captures)
+    setTimeout(function(){els.forEach(function(el){el.classList.add('in');});},1600);
+  } else {
+    els.forEach(function(el){el.classList.add('in');});
+  }
 </script>
 </body>
 </html>
